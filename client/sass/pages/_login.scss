@@ -1,0 +1,50 @@
+.page {
+    &.login {
+        .bg-image {
+            min-height: 58%;
+            .title {
+                bottom: auto;
+                display: inline-block;
+                height: auto;
+                left: auto;
+                position: absolute;
+                right: 50%;
+                top: 55%;
+                transform: translate3d(50%, -50%, 0px);
+                width: 60%;
+                img {
+                    display: block;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.bottom-info {
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+    margin-top: 0;
+    line-height: 1.5rem;
+    width: 100%;
+    .no-nearby {
+        @include opacity(0.5);
+    }
+}
+
+.sign-panel {
+    background: #fff;
+    position: absolute;
+    padding-bottom: 0;
+    bottom: 4.5rem;
+    width: 100%;
+    button {
+        margin-top: 3rem;
+        background: #50d2c2;
+        line-height: 3rem;
+    }
+}

@@ -1,0 +1,108 @@
+nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 4.5rem;
+    @include transform(translate3d(0, 0, 0));
+    @include transition-property(all);
+    @include transition-duration(200ms);
+    @include transition-timing-function(ease-out);
+    background: rgba(255, 255, 255, 0.97);
+    text-align: center;
+    z-index: 10;
+    &.black {
+        background: transparent none repeat scroll 0 0;
+        color: white;
+        .nav-item {
+            color: white;
+        }
+        &:after {
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMSAxIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48bGluZWFyR3JhZGllbnQgaWQ9Imxlc3NoYXQtZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYigwLCAwLCAwKSIgc3RvcC1vcGFjaXR5PSIwLjMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9InJnYigwLCAwLCAwKSIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2xlc3NoYXQtZ2VuZXJhdGVkKSIgLz48L3N2Zz4=);
+            @include background-image(linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 100%));
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: auto;
+            left: 0;
+            width: 100%;
+            height: 5.0rem;
+            content: '';
+            z-index: -1;
+        }
+    }
+    &.scrolled {
+        background: rgba(255, 255, 255, 0.97);
+        color: #333333;
+        &:after {
+            opacity: 0;
+        }
+        .nav-item {
+            color: #333333;
+        }
+    }
+    .title-page {
+        font-size: 1.1rem;
+        line-height: 1.8rem;
+        font-family: $baseFontFamily;
+        font-style: normal;
+        letter-spacing: 0.3rem;
+        text-indent: 0.3rem;
+        text-transform: uppercase;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        bottom: auto;
+        left: 0;
+        width: auto;
+        height: auto;
+        @include transform(translate3d(0, -40%, 0));
+        line-height: 1;
+        .subtext-page {
+            font-size: 1.0rem;
+            line-height: 1.6rem;
+            font-family: $baseFontFamily;
+            font-weight: 700;
+            color: #aaaaaa;
+            display: block;
+            letter-spacing: 0;
+            line-height: 1;
+            text-transform: none;
+        }
+    }
+    .nav-item {
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+        color: #333333;
+        display: inline-block;
+        height: 4.5rem;
+        width: 4.0rem;
+        &:active {
+            opacity: 0.5;
+        }
+        [class^="icon-"],
+        [class*=" icon-"] {
+            line-height: 4.5rem;
+            vertical-align: middle;
+        }
+    }
+    .nav-group {
+        position: absolute;
+        top: 0;
+        right: auto;
+        bottom: auto;
+        left: 0;
+        width: auto;
+        height: auto;
+        z-index: 1;
+        &.right {
+            left: auto;
+            right: 0;
+        }
+    }
+}

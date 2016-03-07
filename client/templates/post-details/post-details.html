@@ -1,0 +1,109 @@
+<template name="postDetails">
+    <div class="page post-details" style="transform: translateX(0px);">
+        <nav class="black">
+            <div class="nav-group">
+
+                <a class="nav-item js-back" href="#"><span class="icon-arrow-left-alt"></span></a>
+
+            </div>
+
+            <div class="title-page">
+                Recipe
+                <span class="subtext-page"></span>
+            </div>
+
+            <div class="nav-group right">
+
+
+                <a href="#" class="nav-item js-add-bookmark"><span class="icon-bookmark-hollow"></span></a>
+
+                <a href="#" class="nav-item js-share"><span class="icon-camera"></span></a>
+
+            </div>
+        </nav>
+
+        <div class="bg-image" style="background-image: url('/images/recipes/640x800/summer-apricots-honey-panna-cotta.jpg')"></div>
+
+        <div class="attribution-title js-uncollapse">
+            <h1 class="title-recipe">{{title}}</h1>
+            <div class="metadata-wrapper">
+                <p class="description">Juicy, fragrant, perfectly textured for a little fire action</p>
+                <span class="source">Tartelette</span>
+                <span class="time">35 min</span>
+            </div>
+
+            <div class="btns-group pure-g">
+                <div class="pure-u-1-2">
+                    <a class="btn btn-secondary btn-block js-show-order">Make It</a>
+                </div>
+                <div class="pure-u-1-2">
+                    <a class="btn btn-secondary btn-block js-show-order">Pictures</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="content-scrollable static-nav make-scrollable">
+            <a class="btn-tertiary js-share"><span class="icon-camera"></span> Share that you made this</a>
+
+            <h2 class="list-title">Ingredients</h2>
+            <ul class="list-ingredients">
+
+                <li class="item-ingredient">6 apricots</li>
+
+                <li class="item-ingredient">olive oil</li>
+
+                <li class="item-ingredient">1/4 cup water</li>
+
+                <li class="item-ingredient">1 tablespoon powdered gelatin (2 sheets gelatin)</li>
+
+                <li class="item-ingredient">2 cups heavy cream</li>
+
+                <li class="item-ingredient">1/4 cup honey</li>
+
+                <li class="item-ingredient">1 cup full fat buttermilk</li>
+
+            </ul>
+
+            <h2 class="list-title">Directions</h2>
+            <ol class="list-directions">
+
+                <li class="item-direction">
+                    <span class="text">Cut the apricots in half and remove the pit. Brush lightly with olive oil and grill over hot coals until tender (about 3-4 minutes on each side).</span>
+                </li>
+
+                <li class="item-direction">
+                    <span class="text">Let cool and puree until smooth in a food processor. Divide the mixture between 6 glasses.</span>
+                </li>
+
+                <li class="item-direction">
+                    ...
+                </li>
+            </ol>
+            <a href="http://www.tarteletteblog.com/2011/07/recipe-gluten-free-apricots-honey-panna.html" target="_blank" class="btn-primary js-open">See full recipe on Tartelette</a>
+        </div>
+
+        <div class="content-scrollable static-nav feed-scrollable delayed">
+            <a class="btn-tertiary js-share"><span class="icon-camera"></span> Share that you made this</a>
+            <div class="list-activities">
+
+                <a href="/recipes/summer-apricots-honey-panna-cotta?activityId=26tpJDDTmPGZdFmSh" class="item-activity">
+
+                    <span class="attribution">
+      <span class="avatar">
+        <img src="https://avatars3.githubusercontent.com/u/204768?v=2&amp;s=400" class="image-avatar">
+      </span>
+                    <span class="meta">
+        <span class="author">Matt</span> made <span class="recipe">Apricots Honey Panna Cotta</span>: I substituted strawberries for apricots - incredible!
+                    <span class="location">&mdash;SoMA, San Francisco</span>
+                    </span>
+                    </span>
+
+                    <div class="bg-image" style="background-image: url('/img/activity/activity-placeholder-strawberry-640x640.jpg');"></div>
+
+                </a>
+
+            </div>
+        </div>
+    </div>
+</template>

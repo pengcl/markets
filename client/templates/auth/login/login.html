@@ -1,0 +1,44 @@
+<template name="login">
+    <div class="page login">
+        <nav>
+            <div class="nav-group">
+                <a class="nav-item js-menu" href="javascript:;"><span class="icon-arrow-left-alt"></span></a>
+            </div>
+            <div class="title-page">用户登陆
+                <span class="subtext-page"></span>
+            </div>
+            <div class="nav-group right">
+            </div>
+        </nav>
+        <div class="content-scrollable">
+            <div class="bg-image login">
+                <h1 class="title">
+                    <img alt="Local Market" src="/images/loginBg.png">
+                </h1>
+                <span class="hours"></span>
+            </div>
+            <div class="sign-panel pd15">
+                <form name="loginForm" ng-controller="LoginController" ng-submit="login(credentials)" novalidate>
+                    <div class="form-group">
+                        <label class="control-label opt5" for="email">手机号</label>
+                        <input type="email" id="email" name="email" class="form-control" ng-model="credentials.email">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label opt5" for="password">验证码</label>
+                        <div class="input-group">
+                            <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password">
+                            <div class="input-group-addon opt15">获取验证码</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-nearby btn-block" type="submit">登录</button>
+                </form>
+            </div>
+            <div class="bottom-info pd15">
+                <div class="pure-g">
+                    <div class="no-nearby pure-u-1-2">还没有nearBy帐号？</div>
+                    <div class="register pure-u-1-2"><a href="safari://lefans.com">注册</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,7 +1,31 @@
 <template name="postsList">
-    <ul class="posts">
-        {{#each posts}}
-            {{> postItem}}
-        {{/each}}
-    </ul>
+    <div class="page home">
+        <nav class="black">
+            <div class="nav-group">
+                <a class="nav-item js-menu" href="#"><span class="icon-menu"></span></a>
+            </div>
+            <div class="title-page">
+                翼分期
+                <span class="subtext-page"></span>
+            </div>
+            <div class="nav-group right">
+            <a class="nav-item js-login" href="{{pathFor 'login'}}"><span class="icon-user"></span></a>
+            </div>
+        </nav>
+        <div class="content-scrollable">
+            <div class="bg-image home">
+                <h1 class="title-home">
+                    <img alt="Local Market" src="/images/app/logo-local.svg">
+                </h1>
+                <span class="hours"></span>
+            </div>
+            <div class="posts">
+                <ul class="list-activities">
+                    {{#each posts}}
+                        {{> postItem}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
 </template>

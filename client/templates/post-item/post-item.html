@@ -1,7 +1,8 @@
 <template name="postItem">
-    <li class="post">
-        <div class="post-content">
-            <a href="{{url}}">{{title}}</a><span>{{domain}}</span>
+    <li class="item-activity">
+        <div class="attribution">
+            <span class="avatar"><img src="https://avatars3.githubusercontent.com/u/204768?v=2&amp;s=400" class="image-avatar"></span>
+            <span class="meta"><span class="author">Matt</span> sad: <a class="recipe" href="{{url}}">{{title}}</a> <span>{{domain}}</span><a href="{{pathFor 'postDetails'}}" class="location">&mdash;SoMA, San Francisco</a></span>
         </div>
     </li>
 </template>

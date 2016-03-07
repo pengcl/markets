@@ -1,0 +1,58 @@
+.page {
+    &.home {
+        .title-page {
+            opacity: 0;
+        }
+        .nav-item {
+            &.logo {
+                width: auto;
+                img {
+                    height: 80%;
+                    margin-top: 0.8rem;
+                    margin-left: 1.0rem;
+                    display: block;
+                    height: 3.0rem;
+                }
+            }
+        }
+        nav.scrolled .title-page {
+            opacity: 1;
+        }
+        .bg-image {
+            &.home {
+                height: 50%;
+            }
+        }
+        .title-home {
+            bottom: auto;
+            @include inline-block;
+            height: auto;
+            left: auto;
+            position: absolute;
+            right: 50%;
+            top: 55%;
+            @include transform(translate3d(50%, -50%, 0px));
+            width: 80%;
+            padding: 0;
+            padding: 0;
+            img {
+                display: block;
+                width: 100%;
+            }
+        }
+        .hours {
+            bottom: 1rem;
+            color: white;
+            font-size: 12px;
+            height: auto;
+            left: 50%;
+            line-height: 18px;
+            position: absolute;
+            right: auto;
+            text-align: center;
+            top: auto;
+            @include transform(translate3d(-50%, 0px, 0px));
+            width: 100%;
+        }
+    }
+}

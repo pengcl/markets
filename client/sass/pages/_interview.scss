@@ -1,0 +1,58 @@
+.page {
+    &.interview {
+        .content-scrollable {
+            background: #f5f2f2;
+        }
+        @at-root .view-box {
+            padding: 1.0rem;
+            background: #fff;
+            margin-top: 1.0rem;
+            .title {
+                font-size: 1.4rem;
+                font-weight: bold;
+                line-height: 2.2rem;
+                border-bottom: 1px solid #f2f2f2;
+                padding-bottom: 0.5rem;
+                margin-bottom: 1.0rem;
+            }
+            .discription {
+                font-size: 1.2rem;
+                line-height: 1.6;
+                margin-top: 1.0rem;
+            }
+            hr {
+                margin-top: 0.7rem;
+                margin-bottom: 0.7rem;
+                height: 1px;
+                background: #f2f2f2;
+                border: 0;
+            }
+            .details {
+                font-size: 1.2rem;
+                table {
+                    width: 100%;
+                    tr {
+                        th {
+                        }
+                        th,td {
+                            padding-right: 1rem;
+                            text-align: left;
+                            vertical-align: text-top;
+                            padding-top: 0.3rem;
+                            padding-bottom: 0.3rem;
+                            line-height: 1.5;
+                        }
+                    }
+                }
+            }
+        }
+        .extra-infos {
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+        em {
+            color: #cf0000;
+            font-style: normal;
+        }
+    }
+}
