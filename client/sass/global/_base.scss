@@ -5,7 +5,16 @@ html {
     @include box-sizing(border-box);
 }
 a {
+    color: #d83e14;
+    cursor: pointer;
     text-decoration: none;
+    transition: all 200ms ease-in 0s;
+    &:hover {
+        color: #a93110;
+    }
+    &:active {
+        color: #555555;
+    }
 }
 
 h1,
@@ -21,6 +30,9 @@ ul,li {
     margin: 0;
     padding: 0;
     list-style: none;
+}
+.opt5 {
+    @include opacity(0.5);
 }
 .margin-button {
     height: 4.5rem;

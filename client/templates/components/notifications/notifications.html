@@ -1,0 +1,12 @@
+<template name="notifications">
+    {{#each errors}}
+        {{> notification}}
+    {{/each}}
+</template>
+
+<template name="notification">
+    <div class="notification">
+       <button type="button" class="close"></button>
+        {{message}}
+    </div>
+</template>

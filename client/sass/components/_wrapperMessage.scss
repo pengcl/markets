@@ -1,0 +1,25 @@
+.wrapper-message {
+    position: absolute;
+    top: 55%;
+    right: 50%;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    @include transform( translate3d(50%, -50%, 0));
+    padding: 0 1.25rem;
+    text-align: center;
+    .title-message {
+        font-size: 18px;
+        line-height: 22px;
+        font-family: 'lato', "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        color: #666666;
+        margin-bottom: .5em;
+    }
+    .subtitle-message {
+        font-size: 14px;
+        line-height: 20px;
+        color: #aaaaaa;
+    }
+}

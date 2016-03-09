@@ -1,0 +1,50 @@
+<template name="register">
+    <div class="page register">
+        <nav>
+            <div class="nav-group">
+                <a class="nav-item js-menu" href="javascript:;"><span class="icon-arrow-left-alt"></span></a>
+            </div>
+            <div class="title-page">用户登陆
+                <span class="subtext-page"></span>
+            </div>
+            <div class="nav-group right">
+            </div>
+        </nav>
+        <div class="content-scrollable">
+            <div class="bg-image login">
+                <h1 class="title">
+                    <img alt="Local Market" src="/images/loginBg.png">
+                </h1>
+                <span class="hours"></span>
+            </div>
+            <div class="sign-panel pd15">
+                <form name="registerForm">
+                    <div class="form-group">
+                        <label class="control-label opt5">全名</label>
+                        <input id="username" type="text" name="username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label opt5">邮箱</label>
+                        <input id="email" type="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label opt5">密码</label>
+                        <input id="password" type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label opt5">生日</label>
+                        <input id="birthday" type="date" name="birthday" class="form-control">
+                    </div>
+                    <button class="btn btn-nearby btn-block" type="submit">注册</button>
+                </form>
+            </div>
+            <div class="bottom-info pd15">
+                <div class="pure-g">
+                    <div class="no-nearby pure-u-1-2">还没有nearBy帐号？</div>
+                    <div class="register pure-u-1-2">注册</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>

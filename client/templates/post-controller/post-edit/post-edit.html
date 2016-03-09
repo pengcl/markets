@@ -1,0 +1,34 @@
+<template name="postEdit">
+    <div class="page post-edit">
+        <nav class="black">
+            <div class="nav-group">
+                <a class="nav-item js-menu" href="#"><span class="icon-menu"></span></a>
+            </div>
+            <div class="title-page">
+                翼分期
+                <span class="subtext-page"></span>
+            </div>
+            <div class="nav-group right">
+                <a class="nav-item js-login" href="{{pathFor 'login'}}"><span class="icon-user"></span></a>
+            </div>
+        </nav>
+        <div class="content-scrollable">
+            <form id="postEdit" name="postEdit" class="js-edit-post">
+                <div class="form-group">
+                    <label class="control-label" for="url">URL</label>
+                    <div class="controls">
+                        <input name="url" id="url" type="text" value="{{url}}" placeholder="Your URL" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="title">Title</label>
+                    <div class="controls">
+                        <input name="title" id="title" type="text" value="{{title}}" placeholder="Name your post" class="form-control" />
+                    </div>
+                </div>
+                <!--<a class="btn btn-danger delete" href="#">Delete post</a>-->
+            </form>
+        </div>
+        <a class="btn btn-block btn-primary save" href="javascript:;">保存</a>
+    </div>
+</template>

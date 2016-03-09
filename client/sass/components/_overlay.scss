@@ -1,0 +1,82 @@
+@import "compass/css3";
+.content-overlay {
+    bottom: 0;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+.overlay {
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMSAxIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48bGluZWFyR3JhZGllbnQgaWQ9Imxlc3NoYXQtZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYigyMzIsIDIzNCwgMjQxKSIgc3RvcC1vcGFjaXR5PSIwLjk3Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSJyZ2IoMjQzLCAyNDMsIDI0NCkiIHN0b3Atb3BhY2l0eT0iMC45NyIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNsZXNzaGF0LWdlbmVyYXRlZCkiIC8+PC9zdmc+);
+    background-image: linear-gradient(to bottom, rgba(232, 234, 241, 0.97), rgba(243, 243, 244, 0.97) 100%);
+    bottom: 0;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+    z-index: 1;
+    .overlay-back,
+    .overlay-dismiss {
+        bottom: auto;
+        height: 4.8rem;
+        left: auto;
+        position: absolute;
+        right: auto;
+        text-align: center;
+        text-decoration: none;
+        top: 0;
+        width: 4.8rem;
+        z-index: 1;
+        [class^="icon-"],
+        [class*=" icon-"] {
+            color: #666666;
+            font-size: 1.6rem;
+            line-height: 4.8rem;
+        }
+    }
+    .overlay-back {
+        left: 0;
+    }
+    .overlay-dismiss {
+        right: 0;
+    }
+    .wrapper-heading {
+        bottom: auto;
+        height: auto;
+        left: auto;
+        padding: 0 1.25rem;
+        position: absolute;
+        right: auto;
+        text-align: center;
+        top: 45%;
+        @include transform( translate3d(0px, -50%, 0px));
+        width: 100%;
+    }
+    .title-overlay {
+        color: #333333;
+        font-family: "lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+    .subtitle-overlay {
+        color: #555555;
+        font-size: 18px;
+        line-height: 1.5;
+    }
+    &.auth {
+        //@include transform( translate3d(-100%, 0px, 0px));
+    }
+    .overlay-hook {
+        &.auth-open {
+            @include transform( translate3d(0px, 0px, 0px));
+        }
+    }
+}

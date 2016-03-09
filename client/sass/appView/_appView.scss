@@ -95,3 +95,10 @@ body {
     height: auto;
     cursor: pointer;
 }
+
+.menu-open {
+    .content-overlay {
+        @include transform(translate3d(45%, 0px, 0px));
+        z-index: 1;
+    }
+}

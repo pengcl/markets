@@ -3,10 +3,19 @@
         <div class="title-welcome">翼分期 - 充值平台</div>
         <div class="description-welcome"></div>
     </div>
-    <div id="container" class="">
+    <div id="container" class="{{menuOpen}} {{overlayOpen}}">
         <section id="menu" class="overthrow">
             {{> menu}}
         </section>
+
+        <div class="notifications">
+            {{> notifications}}
+        </div>
+
+        {{> overlay}}
+
+        <div class="content-overlay"></div>
+
         <div id="content-container">
             {{> yield}}
         </div>
