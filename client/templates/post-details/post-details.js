@@ -1,21 +1,19 @@
 var TAB_KEY = 'detailsShowTab';
 
 Template.postDetails.onCreated(function () {
-    if (Router.current().params.postId)
-        Template.postDetails.setTab('feed');
-    else
-        Template.postDetails.setTab('recipe');
+    Template.postDetails.setTab('recipe');
 });
 
 Template.postDetails.onRendered(function () {
-    this.$('.recipe').touchwipe({
+    this.$('.post-details').touchwipe({
         wipeDown: function () {
-            if (Session.equals(TAB_KEY, 'recipe'))
-                Template.postDetails.setTab('make')
+            if (Session.equals(TAB_KEY, 'recipe')) {
+                Template.postDetails.setTab('make');
+            }
         },
         preventDefaultEvents: false
     });
-    this.$('.attribution-recipe').touchwipe({
+    this.$('.attribution-title').touchwipe({
         wipeUp: function () {
             if (!Session.equals(TAB_KEY, 'recipe'))
                 Template.postDetails.setTab('recipe')
@@ -30,18 +28,11 @@ Template.postDetails.onRendered(function () {
 //   class that indicates if the feed tab should slide out of the
 //   way smoothly, right away, or after the transition is over
 Template.postDetails.setTab = function (tab) {
-    var lastTab = Session.get(TAB_KEY);
     Session.set(TAB_KEY, tab);
-
-    var fromRecipe = (lastTab === 'recipe') && (tab !== 'recipe');
-    $('.feed-scrollable').toggleClass('instant', fromRecipe);
-
-    var toRecipe = (lastTab !== 'recipe') && (tab === 'recipe');
-    $('.feed-scrollable').toggleClass('delayed', toRecipe);
 }
 
 Template.postDetails.helpers({
-    isOwen:function(){
+    isOwen: function () {
         return this.userId === Meteor.userId();
     },
     isActiveTab: function (name) {
@@ -51,11 +42,11 @@ Template.postDetails.helpers({
         return Session.get(TAB_KEY);
     },
     bookmarked: function () {
-        return Meteor.user() && _.include(Meteor.user().bookmarkedRecipeNames, this.name);
+        return Meteor.user() && _.include(Meteor.user().bookmarkedPostIds, this._id);
     },
     activities: function () {
         return Activities.find({
-            recipeName: this.name
+            postId: this._id
         }, {
             sort: {
                 date: -1
@@ -68,34 +59,27 @@ Template.postDetails.events({
     'click .js-add-bookmark': function (event) {
         event.preventDefault();
 
-        if (!Meteor.userId())
+        if (!Meteor.userId()) {
             return Overlay.open('authOverlay');
-
-        Meteor.call('bookmarkRecipe', this.name);
+        } else {
+            Meteor.call('bookmarkPost', this._id, function (error, result) {});
+        }
     },
 
     'click .js-remove-bookmark': function (event) {
         event.preventDefault();
 
-        Meteor.call('unbookmarkRecipe', this.name);
+        Meteor.call('unbookmarkPost', this._id);
     },
 
-    'click .js-edit': function () {
-        event.preventDefault();
-        if (!Meteor.userId()) {
-            return Overlay.open('authOverlay');
-        }
-        Meteor.call('eidtPost', this._id);
-    },
-
-    'click .js-show-recipe': function (event) {
+    'click .js-show-order': function (event) {
         event.stopPropagation();
-        Template.postDetails.setTab('make')
+        Template.postDetails.setTab('order')
     },
 
-    'click .js-show-feed': function (event) {
+    'click .js-show-comment': function (event) {
         event.stopPropagation();
-        Template.postDetails.setTab('feed')
+        Template.postDetails.setTab('comment')
     },
 
     'click .js-uncollapse': function () {

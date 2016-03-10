@@ -24,7 +24,7 @@ Template.postEdit.events({
         );
     },
 
-    'click .save':function(e){
+    'click .js-save':function(e){
         $("#postEdit").submit();
     },
 

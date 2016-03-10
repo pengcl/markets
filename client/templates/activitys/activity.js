@@ -17,11 +17,11 @@ Template.activity.helpers({
   firstName: function() {
     return this.userName.split(' ')[0];
   },
-  postTitle: function() {
-    return PostsData[this.postName].title;
+  recipeTitle: function() {
+    return RecipesData[this.recipeName].title;
   },
   path: function() {
-    return Router.path('post', { id: this.postId },
+    return Router.path('recipe', { name: this.recipeName },
       { query: { activityId: this._id } })
   }
 })

@@ -12,7 +12,18 @@
     @include border-radius(0px);
 }
 
-@import "compass/css3";
+.form-panel {
+    background: #fff none repeat scroll 0 0;
+    bottom: 4.5rem;
+    padding-bottom: 0;
+    position: absolute;
+    width: 100%;
+    button {
+        line-height: 3rem;
+        margin-top: 3rem;
+    }
+}
+
 .form-group {
     margin-bottom: 1.5rem;
     .control-label {
@@ -54,7 +65,7 @@
 .btn {
     color: white;
     display: inline-block;
-    font-family: "lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.2rem;
     font-weight: 900;
     letter-spacing: 0.3rem;
@@ -98,7 +109,48 @@
     top: auto;
     background-color: #46c8f5;
     color: white;
+    font-size: 1.4rem;
     &:hover {
         background-color: #16baf2;
+    }
+}
+
+.btn-camera {
+    @include border-radius(10rem);
+    @include box-shadow(0 0 0 2px #d83e14 inset);
+    font-size: 3.0rem;
+    height: 6rem;
+    letter-spacing: 0;
+    padding: 0;
+    text-indent: 0;
+    width: 6rem;
+    @include inline-block;
+    position: relative;
+    &:hover {
+        @include box-shadow(0 0 0 2px #ca3a13 inset);
+        .icon-camera {
+            background-color: #ca3a13;
+        }
+    }
+    &:active {
+        @include box-shadow(0 0 0 2px #ca3a13 inset);
+        .icon-camera {
+            background-color: #ca3a13;
+        }
+    }
+    .icon-camera {
+        background-color: #d83e14;
+        border-radius: 10em;
+        bottom: auto;
+        color: white;
+        display: inline-block;
+        height: 5.4rem;
+        left: auto;
+        line-height: 5.4rem;
+        position: absolute;
+        right: 50%;
+        top: 50%;
+        @include transform(translate3d(50%, -50%, 0px));
+        width: 5.4rem;
     }
 }

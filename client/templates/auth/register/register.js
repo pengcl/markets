@@ -7,7 +7,9 @@ Template.register.events({
         e.preventDefault();
 
         var credentials = {
-            username: $(e.target).find('#username').val(),
+            profile: {
+                name: $(e.target).find('#name').val()
+            },
             email: $(e.target).find('#email').val(),
             password: $(e.target).find('#password').val()
         };

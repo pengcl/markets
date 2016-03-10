@@ -39,5 +39,9 @@ Template.postAdd.events({
                 _id: result._id
             });
         });
+    },
+    'click .js-add':function(e){
+        e.preventDefault();
+        $("#postAdd").submit();
     }
 });

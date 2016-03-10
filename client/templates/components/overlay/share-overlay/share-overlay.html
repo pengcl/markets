@@ -1,0 +1,53 @@
+<template name="shareOverlay">
+  {{#if currentUser}}
+    <div class="overlay share">
+
+      {{#unless attachedImage}}
+        <a href="#" class="js-close-overlay overlay-dismiss"><span class="icon-cross"></span></a>
+        <div class="wrapper-heading">
+          <div class="title-overlay">分享</div>
+          <div class="subtitle-overlay">他享您的本次购物体验</div>
+        </div>
+
+        <div class="wrapper-camera">
+          <a class="js-attach-image btn-camera"><span class="icon-camera"></span></a>
+          <div class="subtext-camera">拍一张宝贝的照片吧</div>
+        </div>
+      {{else}}
+        <a href="#" class="js-unattach-image overlay-back"><span class="icon-arrow-left-alt"></span></a>
+        <div class="title-page">分享</div>
+        <a href="#" class="js-close-overlay overlay-dismiss"><span class="icon-cross"></span></a>
+
+        <div class="bg-image" style="background-image: url('{{attachedImage}}')"></div>
+
+        <form class="form-share">
+          <div class="form-group">
+            <div class="avatar">
+              <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_2_normal.png" class="image-avatar">
+            </div>
+
+            <textarea name="text" type="text"
+              autocapitalize="off" autocorrect="off"
+              required maxlength="140"
+              class="message-share"
+              placeholder="说说您此刻的建议或想法…"></textarea>
+          </div>
+
+          <div class="wrapper-checkbox">
+            <label for="weixin" class="checkbox">
+              <input type="checkbox" name="weixin" id="weixin" checked>
+              <span>分享到朋友圈</span>
+            </label>
+          </div>
+
+          <button class="btn btn-block btn-primary" type='submit'>
+              Share
+          </button>
+        </form>
+      {{/unless}}
+
+    </div>
+  {{else}}
+    {{> authOverlay}}
+  {{/if}}
+</template>
