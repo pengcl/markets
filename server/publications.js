@@ -2,6 +2,14 @@ Meteor.publish('posts', function () {
     return Posts.find();
 });
 
+Meteor.publish('feed', function() {
+  return Activities.find({}, {sort: {date: -1}, limit: 10});
+});
+
+Meteor.publish('activities', function() {
+  return Activities.find({}, {sort: {date: -1}, limit: 10});
+});
+
 Meteor.publish('post', function (id) {
     check(id, String);
     return [

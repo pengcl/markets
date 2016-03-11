@@ -1,7 +1,16 @@
-Template.register.helpers({
+Template.settings.helpers({
+    userName: function(){
+        return Meteor.user().profile.name;
+    },
+    userMail: function(){
+        return Meteor.user().email[0];
+    },
+    userAvatar: function(){
+        return Meteor.user().profile.avatar;
+    }
 });
 
-Template.register.events({
+Template.settings.events({
     'submit form': function (e) {
         e.preventDefault();
 
@@ -21,10 +30,5 @@ Template.register.events({
                 Router.go('postsList');
             }
         });
-
-        var file = $('#uploadAvatar').get(0).files[0];
-        Images.insert(file, function (err, fileObj) {
-            alert(err);
-        })
     }
 });

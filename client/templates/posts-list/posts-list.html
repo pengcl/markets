@@ -1,6 +1,8 @@
 <template name="postsList">
     <div class="page home">
-        {{>nav title='Local Market' black=true}}
+        {{#nav title='Local Market' black=true}}
+        <a class="nav-item js-setting" href="{{pathFor 'settings'}}"><span class="icon-user"></span></a>
+        {{/nav}}
         <div class="content-scrollable">
             <div class="bg-image home">
                 <h1 class="title-home">

@@ -25,3 +25,6 @@ mdg:geolocation
 audit-argument-checks
 underscore
 check
+cfs:standard-packages
+cfs:gridfs
+cfs:filesystem

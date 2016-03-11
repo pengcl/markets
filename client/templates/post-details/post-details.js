@@ -52,6 +52,15 @@ Template.postDetails.helpers({
                 date: -1
             }
         });
+    },
+    comments: function () {
+        return Comments.find({
+            postId: this._id
+        }, {
+            sort: {
+                date: -1
+            }
+        });
     }
 });
 

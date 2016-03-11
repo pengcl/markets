@@ -50,20 +50,12 @@ Template.shareOverlay.events({
       postId: self._id,
       text: text,
       image: Session.get(IMAGE_KEY)
-    }, Geolocation.currentLocation(), function(error, result) {
+    }, function(error, result) {
       if (error) {
         alert(error.reason);
       } else {
-        Template.appBody.addNotification({
-          action: 'View',
-          title: 'Your photo was shared.',
-          callback: function() {
-            Router.go('post', { id: self._id },
-              { query: { activityId: result } });
-
-            Template.post.setTab('comment');
-          }
-        });
+          throwError('Your photo was shared');
+          Template.postDetails.setTab('comment');
       }
     });
 

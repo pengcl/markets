@@ -14,14 +14,14 @@ Template.activity.onRendered(function() {
 });
 
 Template.activity.helpers({
-  firstName: function() {
-    return this.userName.split(' ')[0];
+  userName: function() {
+    return this.userName;
   },
-  recipeTitle: function() {
-    return RecipesData[this.recipeName].title;
+  postTitle: function() {
+    return Posts.find().title;
   },
   path: function() {
-    return Router.path('recipe', { name: this.recipeName },
+    return Router.path('post', { id: this.postId },
       { query: { activityId: this._id } })
   }
 })
