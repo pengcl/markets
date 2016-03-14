@@ -28,3 +28,4 @@ check
 cfs:standard-packages
 cfs:gridfs
 cfs:filesystem
+cfs:graphicsmagick

@@ -21,10 +21,5 @@ Template.register.events({
                 Router.go('postsList');
             }
         });
-
-        var file = $('#uploadAvatar').get(0).files[0];
-        Images.insert(file, function (err, fileObj) {
-            alert(err);
-        })
     }
 });

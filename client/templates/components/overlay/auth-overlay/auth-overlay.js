@@ -14,5 +14,6 @@ Template.authOverlay.onCreated(function () {
 Template.authOverlay.events({
     'click .js-signin': function () {
         Router.go('login');
+        Overlay.close();
     }
 });
