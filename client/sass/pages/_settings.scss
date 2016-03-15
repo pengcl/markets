@@ -1,0 +1,36 @@
+.page {
+    &.settings {
+        .bg-image {
+            min-height: 48%;
+            h1 {
+                ins {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    height: 6rem;
+                    width: 6rem;
+                    background: #50d2c2;
+                    @include border-radius(3rem);
+                    text-decoration: none;
+                    color: #fff;
+                    font-size: 4rem;
+                    text-align: center;
+                    span {
+                        line-height: 6rem;
+                    }
+                }
+                .avatar {
+                    position: relative;
+                }
+                input.upload-avatar {
+                    @include opacity(0);
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        }
+    }
+}

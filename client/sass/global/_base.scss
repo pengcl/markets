@@ -40,7 +40,9 @@ ul,li {
 .pd15 {
     padding: 1.5rem;
 }
-
+input {
+    @include border-radius(0);
+}
 input[type="text"], textarea {
     background: transparent none repeat scroll 0 0;
     border: medium none;

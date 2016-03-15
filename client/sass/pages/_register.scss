@@ -2,21 +2,6 @@
     &.register {
         .bg-image {
             min-height: 48%;
-            .title {
-                bottom: auto;
-                display: inline-block;
-                height: auto;
-                left: auto;
-                position: absolute;
-                right: 50%;
-                top: 55%;
-                transform: translate3d(50%, -50%, 0px);
-                width: 60%;
-                img {
-                    display: block;
-                    width: 100%;
-                }
-            }
         }
     }
 }

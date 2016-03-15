@@ -1,8 +1,5 @@
-var IMAGE_KEY = 'avatarAttachedImage';
-
 Template.settings.onCreated(function () {
-    /*Session.set(TWEETING_KEY, true);*/
-    Session.set(IMAGE_KEY, null);
+    Meteor.subscribe('images');
 });
 
 Template.settings.helpers({
@@ -10,13 +7,12 @@ Template.settings.helpers({
         return Meteor.user().profile.name;
     },
     userMail: function () {
-        return Meteor.user().emails[0];
+        return Meteor.user().emails[0].address;
     },
     userAvatar: function () {
-        return Meteor.user().profile.avatar;
-    },
-    attachedImage: function () {
-        return Session.get(IMAGE_KEY);
+        return Images.find({
+            _id:Meteor.user().avatarId
+        });
     }
 });
 
@@ -27,10 +23,16 @@ Template.settings.events({
     },
     'change .js-attach-image': function (e) {
         e.preventDefault();
+
         FS.Utility.eachFile(e, function (file) {
             Images.insert(file, function (err, fileObj) {
-                alert(err);
-                alert(fileObj);
+                var avatarId = fileObj._id;
+                Meteor.call('setAvatar', avatarId, function (error, result) {
+                    // 显示错误信息并退出
+                    if (error) {
+                        return throwError(error.reason);
+                    } else {}
+                });
             });
         });
     },

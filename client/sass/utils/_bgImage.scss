@@ -5,9 +5,26 @@
     overflow: hidden;
     position: relative;
     &.home {
-        @include background-image(linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.0) 100%),url("/images/app/bg-home-640x655.jpg"));
+        @include background-image(linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.0) 100%), url("/images/app/bg-home-640x655.jpg"));
     }
-    &.login {
+    &.login {}
+    .title-avatar {
+        width: 50%;
+    }
+    .title-avatar,.title-login,.title-register {
+        bottom: auto;
+        display: inline-block;
+        height: auto;
+        left: auto;
+        position: absolute;
+        right: 50%;
+        top: 55%;
+        @include transform(translate3d(50%, -50%, 0));
+        width: 60%;
+        img {
+            display: block;
+            width: 100%;
+        }
     }
     .title-bg {
         position: absolute;

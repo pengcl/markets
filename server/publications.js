@@ -21,7 +21,7 @@ Meteor.publish('activities', function () {
 });
 
 Meteor.publish('images', function () {
-    return Images.find({});
+    return Images.find();
 });
 
 Meteor.publish('post', function (id) {
@@ -46,6 +46,7 @@ Meteor.publish(null, function () {
         fields: {
             admin: 1,
             bookmarkedPostIds: 1,
+            avatarId: 1,
             'services.twitter.profile_image_url_https': 1
         }
     });
