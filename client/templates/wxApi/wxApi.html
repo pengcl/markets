@@ -1,1 +1,16 @@
-<template name="wxApi"></template>
+<template name="wxApi">
+    <div class="page post-details {{activeTabClass}}" style="transform: translateX(0px);">
+        {{> nav title='Recipe' black=true isback=true}}
+
+        <div class="bg-image" style="background-image: url('/images/recipes/640x800/summer-apricots-honey-panna-cotta.jpg')"></div>
+
+        <div class="attribution-title js-uncollapse">
+            <h1 class="title">{{access_token}}</h1>
+            <div class="metadata-wrapper">
+                <p class="description">Juicy, fragrant, perfectly textured for a little fire action</p>
+                <span class="source">Tartelette</span>
+                <span class="time">35 min</span>
+            </div>
+        </div>
+    </div>
+</template>
