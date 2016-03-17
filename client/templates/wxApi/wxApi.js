@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Template.wxApi.onCreated(function () {
     Meteor.call('getAccessToken', function (error, result) {
         // 显示错误信息并退出
@@ -45,6 +46,11 @@ Template.wxApi.wechatCallbackapiTest = function () {
 var TOKEN: 'weixin';
 
 Template.wxApi.checkSignature = function () {
+=======
+var TOKEN: 'weixin';
+
+Template.wxApi.checkSignature = function () {
+>>>>>>> maket/master
     var signature = $_GET["signature"];
     var timestamp = $_GET["timestamp"];
     var nonce = $_GET["nonce"];
