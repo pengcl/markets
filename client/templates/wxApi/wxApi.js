@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 Template.wxApi.onCreated(function () {
     Meteor.call('getAccessToken', function (error, result) {
         // 显示错误信息并退出
@@ -7,7 +5,7 @@ Template.wxApi.onCreated(function () {
             return throwError(error.reason);
         }
 
-        if (result.postExists) {
+        if (result) {
             throwError('This link has already been posted（该链接已经存在）');
         }
     });
@@ -38,37 +36,4 @@ Template.wxApi.checkSignature = function () {
 }
 
 Template.wxApi.wechatCallbackapiTest = function () {
-    /*if(Template.wxApi.checkSignature()){
-        alert(echoStr);
-        return;
-    }*/
-=======
-var TOKEN: 'weixin';
-
-Template.wxApi.checkSignature = function () {
-=======
-var TOKEN: 'weixin';
-
-Template.wxApi.checkSignature = function () {
->>>>>>> maket/master
-    var signature = $_GET["signature"];
-    var timestamp = $_GET["timestamp"];
-    var nonce = $_GET["nonce"];
-
-    var token = TOKEN;
-    var tmpArr = array($token, $timestamp, $nonce);
-    sort($tmpArr, SORT_STRING);
-    var tmpStr = implode($tmpArr);
-    tmpStr = sha1($tmpStr);
-
-    if (tmpStr == signature) {
-        return true;
-    } else {
-        return false;
-    }
-};
-
-Template.wxApi.wechatCallbackapiTest = function () {
-
->>>>>>> maket/master
 }
