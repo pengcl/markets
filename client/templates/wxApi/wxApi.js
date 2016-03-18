@@ -2,11 +2,11 @@ Template.wxApi.onCreated(function () {
     Meteor.call('getAccessToken', function (error, result) {
         // 显示错误信息并退出
         if (error) {
-            return throwError(error.reason);
+            console.log("error");
         }
 
         if (result) {
-            throwError('This link has already been posted（该链接已经存在）');
+           console.log("result");
         }
     });
 });
