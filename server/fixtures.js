@@ -7,7 +7,6 @@ if (Posts.find().count() === 0) {
 
 if (AccessToken.find().count() === 0) {
     AccessToken.insert({
-        access_token: "0",
-        expires_in: "0"
+        tokenName: "weixin"
     });
 }
