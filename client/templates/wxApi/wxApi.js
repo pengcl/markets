@@ -1,17 +1,18 @@
 Template.wxApi.onCreated(function () {
-    Meteor.call('getAccessToken', function (error, result) {
-        // 显示错误信息并退出
-        if (error) {
-            console.log("error");
-        }
 
-        if (result) {
-           console.log("result");
-        }
-    });
 });
 Template.wxApi.helpers({
-
+    checkItOut: function () {
+        Meteor.call('getJsonContent', function (error, result) {
+            // 显示错误信息并退出
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(result);
+                return result;
+            }
+        });
+    }
 });
 
 Template.wxApi.checkSignature = function () {
@@ -35,5 +36,4 @@ Template.wxApi.checkSignature = function () {
     }*/
 }
 
-Template.wxApi.wechatCallbackapiTest = function () {
-}
+Template.wxApi.wechatCallbackapiTest = function () {}
