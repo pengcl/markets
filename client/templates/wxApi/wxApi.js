@@ -1,17 +1,22 @@
 Template.wxApi.onCreated(function () {
-
 });
 Template.wxApi.helpers({
     checkItOut: function () {
+        var access_touken;
         Meteor.call('getJsonContent', function (error, result) {
             // 显示错误信息并退出
             if (error) {
                 console.log(error);
             } else {
-                console.log(result);
-                return result;
+                access_touken = result;
+                console.log(access_touken);
             }
         });
+        //alert(access_touken);
+        return access_touken;
+    },
+    checkTest: function () {
+        return "sb"
     }
 });
 
