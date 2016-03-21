@@ -3,8 +3,8 @@ Meteor.methods({
         //check(Meteor.userId(), String);
         check(url, String);
 
-        result = HTTP.post(url);
+        var result = HTTP.get(url);
 
-        return result.access_token;
+        return result;
     }
 });

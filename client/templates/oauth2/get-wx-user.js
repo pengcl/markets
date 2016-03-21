@@ -1,15 +1,23 @@
-Template.getWxUser.onCreated(function () {
-    var controller = Iron.controller();
-    var wx_code = controller.state.get('wx_code');
-    var url = Template.getWxUser.getAccessTokenUrl(wx_code);
-    var _access_token = Meteor.call('getJsonData', url, function (error, result) {
-        // 显示错误信息并退出
-        if (error) {
-            alert(error);
-        } else {
-            alert(result);
-        }
-    });
+Template.getWxUser.onCreated(function () {});
+
+Template.getWxUser.helpers({
+    getJsonData: function () {
+        Meteor.call('getJsonData', url, function (error, result) {
+            var controller = Iron.controller();
+            var wx_code = controller.state.get('wx_code');
+            var url = Template.getWxUser.getAccessTokenUrl(wx_code);
+            // 显示错误信息并退出
+            alert(url);
+            if (error) {
+                console.log("error");
+            } else {
+                var wx_usr_json = result;
+                console.log("result");
+            }
+        });
+        //alert(access_touken);
+        return access_touken;
+    }
 });
 
 Template.getWxUser.getAccessTokenUrl = function (wx_code) {
