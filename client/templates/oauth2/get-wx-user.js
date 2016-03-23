@@ -1,58 +1,79 @@
 Template.getWxUser.onCreated(function () {
     var controller = Iron.controller();
     var wx_code = controller.state.get('wx_code');
-    //var wx_apiUrl = Template.getWxUser.getAccessTokenUrl(wx_code);
-    var wx_accessToken = Template.getWxUser.getAccessToken(wx_code);
-    //alert(wx_accessToken);
-    //var wx_userinfo = Template.getWxUser.getWxUserinfo(wx_accessToken.access_token, wx_accessToken.openid);
+
+    if (wx_code) { //检查wx_ode参数是否存在，如果存在，用code去获取token
+        Template.getWxUser.getAccessToken(wx_code);
+        //Template.getWxUser.getWxUserinfo (Session.get("access_token"), Session.get("openid"));
+    } else { //wx_code不存在，去获取wx_code，
+        window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appId + "&redirect_uri=http%3A%2F%2Flefans.com%2FgetWxUser&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+    }
 });
 
-Template.getWxUser.helpers({});
-
-Template.getWxUser.getAccessTokenUrl = function (code) {
-    var wx_apiUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appId + "&secret=" + appSecret + "&code=" + code + "&grant_type=authorization_code";
-    return wx_apiUrl;
-};
-
-Template.getWxUser.checkAccessTokenUrl = function (_access_token, _openId) {
-    var wx_apiUrl = "https://api.weixin.qq.com/sns/auth?access_token=" + ACCESS_TOKEN + "&openid=" + wx_openId;
-    return wx_apiUrl;
-};
-
-Template.getWxUser.getWxUserinfoUrl = function (_access_token, _openId) {
-    var wx_apiUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=" + ACCESS_TOKEN + "&openid=" + OPENID + "&lang=zh_CN";
-    return wx_apiUrl;
-};
+Template.getWxUser.helpers({
+    userinfo: function () {
+        Template.getWxUser.getWxUserinfo (Session.get("access_token"), Session.get("openid"));
+        return Session.get("nickname");
+    }
+});
 
 Template.getWxUser.getAccessToken = function (code) {
-    var url = Template.getWxUser.getAccessTokenUrl(code);
-    var _accessToken_json = Meteor.apply('getJsonData', [url], {
-        wait: true
-    }, function (error, result) {
+    var url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appId + "&secret=" + appSecret + "&code=" + code + "&grant_type=authorization_code";
+
+    Meteor.call('getJsonData', url, function (err, result) {
         if (result) {
-            //console.log(eval("(" + result.content + ")"));
-            _accessToken_json = eval("(" + result.content + ")");
-            console.log(_accessToken_json);
+            console.log(result);
+            Session.set("access_token", result.access_token);
+            Session.set("refresh_token", result.refresh_token);
+            Session.set("openid", result.openid);
         } else {
             return (error);
         }
     });
-    //return _accessToken_json;
-    console.log("outsideApply:" + _accessToken_json);
 };
 
-Template.getWxUser.getWxUserinfo = function (token, id) {
-    var url = Template.getWxUser.getWxUserinfoUrl(token, id);
+Template.getWxUser.refreshAccessToken = function (appId, refreshToken) {
+    url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=" + appId + "&grant_type=refresh_token&refresh_token=" + refreshToken;
 
-    var _userInfo_json = Meteor.call('getJsonData', url, function (error, result) {
-        // 显示错误信息并退出
+    Meteor.call('getJsonData', url, function (error, result) {
         if (result) {
-            return eval("(" + result.content + ")");
+            Session.set("access_token", result.access_token);
+            Session.set("refresh_token", result.refresh_token);
+            Session.set("openid", result.openid);
         } else {
             return (error);
         }
     });
-    return _userInfo_json;
+};
+
+Template.getWxUser.checkAccessToken = function (token, openid) {
+    var url = "https://api.weixin.qq.com/sns/auth?access_token=" + token + "&openid=" + openid;
+
+    Meteor.call('getJsonData', url, function (error, result) {
+        if (result) {
+            var checkAccessToken = (eval("(" + result.content + ")"));
+            if (checkAccessToken.errmsg === "ok") {
+                Session.set("checkAccessToken", "1");
+            } else {
+                Session.set("checkAccessToken", "0");
+            }
+        } else {
+            return (error);
+        }
+    });
+}
+
+Template.getWxUser.getWxUserinfo = function (token, openid) {
+    var url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + token + "&openid=" + openid + "&lang=zh_CN";
+
+    Meteor.call('getJsonData', url, function (error, result) {
+        // 显示错误信息并退出
+        if (result) {
+            Session.set(result);
+        } else {
+            return (error);
+        }
+    });
 };
 
 template.getWxUser.checkUser = function (openid) {

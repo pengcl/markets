@@ -5,6 +5,6 @@ Meteor.methods({
 
         var result = HTTP.get(url);
 
-        return result;
+        return (eval("(" + result.content + ")"));
     }
 });
