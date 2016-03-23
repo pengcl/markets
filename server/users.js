@@ -24,12 +24,30 @@ Meteor.methods({
 });
 
 Meteor.methods({
-    checkUser: function (openId) {
-        check(openId, String);
-
-        var _user = Meteor.users.find({
-            openId: openId
+    checkUser: function (userinfo) {
+        check(userinfo, {
+            nickname: String,
+            city: String,
+            country: String,
+            headimgurl: String,
+            language: String,
+            openid: String,
+            province: String,
+            sex: Number
         });
-        return _user._id;
+
+        var _user = Meteor.users.findOne({
+            'profile.openid': userinfo.openid
+        });
+        if (_user) {
+            return {
+                openidExists: true,
+                _id: _user._id
+            };
+        } else {
+            return {
+                openidExists: false
+            };
+        }
     }
 });
