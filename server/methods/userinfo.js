@@ -1,43 +1,68 @@
-OauthToken = new Mongo.Collection('oauthToken');
+var createPassword = function () {
+    var data = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var result = "";
+    for (var i = 0; i < 20; i++) {
+        var r = Math.floor(Math.random() * 62); //取得0-62间的随机数，目的是以此当下标取数组data里的值！
+        result += data[r]; //输出20次随机数的同时，让rrr加20次，就是20位的随机字符串了。
+    }
+    return result
+}
 
 Meteor.methods({
-    getAccessToken: function (url) {
-        check(url, String);
+    getWxUserinfo: function (code) {
+        check(code, String);
 
-        var timestamp = new Date().getTime();
-        var accessToken;
-        var result = HTTP.get(url);
+        var url, userinfo;
 
-        var data = (eval("(" + result.content + ")"));
-        accessToken = {
-            access_token: data.access_token,
-            refresh_token: data.refresh_token,
-            expire_time: timestamp + 7000000
-        };
+        url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appId + "&secret=" + appSecret + "&code=" + code + "&grant_type=authorization_code";
+        accessToken = (eval("(" + (HTTP.get(url)).content + ")"));
 
-        var _openid = OauthToken.findOne({
-            'openid': accessToken.openid
-        });
-        if (_openid) {
-            OauthToken.update({
-                openid: data.openid
-            }, {
-                $set: {
-                    accessToken
-                }
+        if (accessToken.scope === "snsapi_base") {
+            //return accessToken.openid;
+
+            var wx_user = Meteor.users.findOne({
+                'profile.openid': accessToken.openid
             });
+
+
+            if (wx_user) {
+
+                url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=" + appId + "&grant_type=refresh_token&refresh_token=" + wx_user.profile.refresh_token; //刷新access_token的URL
+                refreshToken = (eval("(" + (HTTP.get(url)).content + ")"));
+                var affected = Meteor.users.update({
+                    _id: wx_user._id
+                }, {
+                    $set: {
+                        profile: {
+                            openid: accessToken.openid,
+                            refresh_token: refreshToken.refresh_token
+                        }
+                    }
+                });
+                return refreshToken;
+                url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + refreshToken.access_token + "&openid=" + refreshToken.openid + "&lang=zh_CN"; //获取微信用户信息的URL
+                userinfo = (eval("(" + (HTTP.get(url)).content + ")"));
+                return userinfo;
+            } else {
+                return {
+                    openidNotExists: true
+                };
+            }
         } else {
-            return {
-                openidExists: false
+            url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + accessToken.access_token + "&openid=" + accessToken.openid + "&lang=zh_CN"; //获取微信用户信息的URL
+            userinfo = (eval("(" + (HTTP.get(url)).content + ")"));
+            //return userinfo;
+            var wx_user = {
+                username: userinfo.openid,
+                password: createPassword(),
+                profile: {
+                    openid: userinfo.openid,
+                    refresh_token: accessToken.refresh_token
+                }
             };
+            //Meteor.logout();
+            Accounts.createUser(wx_user);
+            return userinfo;
         }
-
-    },
-    /*getAccessToken: function (url) {
-        check(url, String);
-
-        var result = HTTP.get(url);
-
-        return (eval("(" + result.content + ")"));
-    }*/
+    }
 });
