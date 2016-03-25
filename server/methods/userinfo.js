@@ -18,19 +18,13 @@ Meteor.methods({
         accessToken = (eval("(" + (HTTP.get(url)).content + ")"));
 
         if (accessToken.scope === "snsapi_base") {
-<<<<<<< HEAD
             //查询微信用户是否存在；
-=======
-            //return accessToken.openid;
-
->>>>>>> origin/master
             var wx_user = Meteor.users.findOne({
                 'profile.openid': accessToken.openid
             });
 
 
             if (wx_user) {
-<<<<<<< HEAD
                 url = "https://api.weixin.qq.com/sns/auth?access_token=" + wx_user.profile.access_token + "&openid=" + wx_user.profile.openid;
                 checkAccessToken = (eval("(" + (HTTP.get(url)).content + ")"));
 
@@ -39,11 +33,6 @@ Meteor.methods({
                 url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=" + appId + "&grant_type=refresh_token&refresh_token=" + wx_user.profile.refresh_token; //刷新access_token的URL
                 refreshToken = (eval("(" + (HTTP.get(url)).content + ")"));
                 return refreshToken;
-=======
-
-                url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=" + appId + "&grant_type=refresh_token&refresh_token=" + wx_user.profile.refresh_token; //刷新access_token的URL
-                refreshToken = (eval("(" + (HTTP.get(url)).content + ")"));
->>>>>>> origin/master
                 var affected = Meteor.users.update({
                     _id: wx_user._id
                 }, {
@@ -72,10 +61,7 @@ Meteor.methods({
                 password: createPassword(),
                 profile: {
                     openid: userinfo.openid,
-<<<<<<< HEAD
                     access_token: accessToken.access_token,
-=======
->>>>>>> origin/master
                     refresh_token: accessToken.refresh_token
                 }
             };

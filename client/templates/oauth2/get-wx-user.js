@@ -1,17 +1,9 @@
 Template.getWxUser.onCreated(function () {
     var controller = Iron.controller();
     var wx_code = controller.state.get('wx_code');
-<<<<<<< HEAD
     if (wx_code) {
         Template.getWxUser.getWxUserinfo(wx_code);
     }else{
-=======
-    var wx_scope = controller.state.get('wx_scope');
-
-    if (wx_code) { //检查wx_ode参数是否存在，如果存在，用code去获取token
-        Template.getWxUser.getWxUserinfo(wx_code);
-    } else { //wx_code不存在，去获取基于snsapi_base的code，
->>>>>>> origin/master
         Template.getWxUser.getCode("snsapi_base");
     }
 });
