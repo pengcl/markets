@@ -38,6 +38,7 @@ Template.getWxUser.getWxUserinfoService = function (code) {
     Meteor.call('getWxUserinfoService', code, function (error, result) {
         if (result) {
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (result.errcode) {
                 if (result.errcode === 40029) {
                     Template.getWxUser.getCode("snsapi_base");
@@ -69,6 +70,8 @@ Template.getWxUser.getWxUserinfoService = function (code) {
                 }
             }
 =======
+=======
+>>>>>>> origin/master
             console.log(result);
 >>>>>>> origin/master
         } else {
