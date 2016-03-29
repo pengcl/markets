@@ -1,10 +1,14 @@
 Template.getWxUser.onCreated(function () {
     var controller = Iron.controller();
     var wx_code = controller.state.get('wx_code');
-    if (wx_code) {
-        Template.getWxUser.getWxUserinfo(wx_code);
-    }else{
-        Template.getWxUser.getCode("snsapi_base");
+    if (!Meteor.user()) {
+        if (wx_code) {
+            Template.getWxUser.getWxUserinfoService(wx_code);
+        } else {
+            Template.getWxUser.getCode("snsapi_base");
+        }
+    } else {
+        console.log("have a user");
     }
 });
 
@@ -22,16 +26,52 @@ Template.getWxUser.getCode = function (scope) {
     }
 };
 
-Template.getWxUser.getWxUserinfo = function (code) {
+Template.getWxUser.getWxUserinfoService = function (code) {
 
-    Meteor.call('getWxUserinfo', code, function (error, result) {
+    Meteor.call('getWxUserinfoService', code, function (error, result) {
         if (result) {
-            if (result.openidNotExists) {
-                Template.getWxUser.getCode("snsapi_userinfo");
+            if (result.errcode) {
+                if (result.errcode === 40029) {
+                    Template.getWxUser.getCode("snsapi_base");
+                }else{
+                    console.log("else");
+                }
+            } else {
+                if (result.openidExists) {
+                    Meteor.connection.setUserId(result.userId);
+                    console.log(result);
+                } else {
+                    console.log(result);
+                    var wx_user = {
+                        username: result.userinfo.openid,
+                        password: Template.getWxUser.createPassword(),
+                        profile: {
+                            openid: result.userinfo.openid,
+                            nickname: result.userinfo.nickname,
+                            country: result.userinfo.country,
+                            province: result.userinfo.province,
+                            city: result.userinfo.city,
+                            sex: result.userinfo.sex,
+                            headimgurl: result.userinfo.headimgurl,
+                            language: result.userinfo.language
+                        }
+                    }
+                    Accounts.createUser(wx_user);
+                    console.log(result);
+                }
             }
-            console.log(result);
         } else {
             return error;
         }
     });
 };
+
+Template.getWxUser.createPassword = function () {
+    var data = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var result = "";
+    for (var i = 0; i < 20; i++) {
+        var r = Math.floor(Math.random() * 62); //取得0-62间的随机数，目的是以此当下标取数组data里的值！
+        result += data[r]; //输出20次随机数的同时，让rrr加20次，就是20位的随机字符串了。
+    }
+    return result
+}
