@@ -1,0 +1,77 @@
+<template name="postAdd">
+    <div class="page post-add">
+        {{> nav title='新建商品' isback=true}}
+        <div class="content-scrollable">
+            <div class="bg-image post-add">
+                <div class="owl-carousel owl-theme">
+                    {{#each postGallery}}
+                    <div>
+                        <img src="{{this.url store='original' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail image-avatar" />
+                    </div>
+                    {{/each}}
+                </div>
+                <span id="uploadIcon" class="icon-plus"></span>
+                <input class="icon-plus upload-avatar js-attach-image" id="uploadAvatar" type="file" multiple>
+                <span class="hours">{{errorMessage 'galleryId'}}</span>
+            </div>
+            <form id="postAdd" name="postAdd" class="js-add-post form-panel pd15">
+                <input name="galleryId" id="galleryId" type="hidden" value="{{galleryId}}">
+                <div class="form-group {{errorClass 'title'}}">
+                    <label class="control-label" for="title">商品名称</label>
+                    <div class="controls">
+                        <input name="title" id="title" type="text" value="" placeholder="Name your post" class="form-control" />
+                        <span class="help-block">{{errorMessage 'title'}}</span>
+                    </div>
+                </div>
+                <div class="form-group {{errorClass 'number'}}">
+                    <label class="control-label" for="title">拼团人数</label>
+                    <div class="controls">
+                        <input name="number" id="number" type="number" value="" placeholder="最低发起人数" class="form-control" />
+                        <span class="help-block">{{errorMessage 'number'}}</span>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <a class="btn btn-block btn-primary js-add" href="javascript:;">创建新帖子</a>
+    </div>
+</template>
+
+
+
+<!--<template name="postAdd">
+    <div class="page post-add">
+        {{> nav title='新建商品' isback=true}}
+        <div class="content-scrollable">
+            <div class="bg-image post-add">
+                <h1 class="title title-avatar">
+                   {{#each userAvatar}}
+                    <a class="avatar" href="#">
+                    <img src="{{this.url store='original' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail image-avatar" /></a>
+                    {{/each}}
+                    <ins><span class="icon-plus"></span></ins>
+                    <input class="icon-plus upload-avatar js-attach-image" id="uploadImages" type="file">
+                </h1>
+                <span class="hours"></span>
+            </div>
+            <form id="postAdd" name="postAdd" class="js-add-post form-panel pd15">
+                <input name="galleryId" id="galleryId" type="hidden" value="{{galleryId}}">
+                <div class="form-group {{errorClass 'title'}}">
+                    <label class="control-label" for="title">商品名称</label>
+                    <div class="controls">
+                        <input name="title" id="title" type="text" value="" placeholder="Name your post" class="form-control" />
+                        <span class="help-block">{{errorMessage 'title'}}</span>
+                    </div>
+                </div>
+                <div class="form-group {{errorClass 'number'}}">
+                    <label class="control-label" for="title">拼团人数</label>
+                    <div class="controls">
+                        <input name="number" id="number" type="number" value="" placeholder="最低发起人数" class="form-control" />
+                        <span class="help-block">{{errorMessage 'number'}}</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <a class="btn btn-block btn-primary js-add" href="javascript:;">创建新帖子</a>
+    </div>
+</template>-->
