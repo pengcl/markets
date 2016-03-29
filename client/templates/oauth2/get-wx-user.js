@@ -1,6 +1,7 @@
 Template.getWxUser.onCreated(function () {
     var controller = Iron.controller();
     var wx_code = controller.state.get('wx_code');
+<<<<<<< HEAD
     if (!Meteor.user()) {
         if (wx_code) {
             Template.getWxUser.getWxUserinfoService(wx_code);
@@ -9,6 +10,12 @@ Template.getWxUser.onCreated(function () {
         }
     } else {
         console.log("have a user");
+=======
+    if (wx_code) {
+        Template.getWxUser.getWxUserinfoService(wx_code);
+    }else{
+        Template.getWxUser.getCode("snsapi_base");
+>>>>>>> origin/master
     }
 });
 
@@ -30,6 +37,7 @@ Template.getWxUser.getWxUserinfoService = function (code) {
 
     Meteor.call('getWxUserinfoService', code, function (error, result) {
         if (result) {
+<<<<<<< HEAD
             if (result.errcode) {
                 if (result.errcode === 40029) {
                     Template.getWxUser.getCode("snsapi_base");
@@ -60,6 +68,9 @@ Template.getWxUser.getWxUserinfoService = function (code) {
                     console.log(result);
                 }
             }
+=======
+            console.log(result);
+>>>>>>> origin/master
         } else {
             return error;
         }
