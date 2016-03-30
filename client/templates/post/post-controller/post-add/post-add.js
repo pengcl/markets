@@ -3,6 +3,21 @@ Template.postAdd.onCreated(function () {
     Session.set('postSubmitErrors', {});
 });
 
+Template.galleryItem.onRendered(function () {
+    $(".owl-carousel").owlCarousel();
+    Template.postAdd.owl = $(".owl-carousel").data('owlCarousel');
+
+    Template.postAdd.owl.reinit({
+        navigation: true, // Show next and prev buttons
+        slideSpeed: 300,
+        paginationSpeed: 400,
+        navigationText: ["<", ">"],
+        singleItem: true
+    });
+});
+
+Template.postAdd.arr = [];
+
 Template.postAdd.helpers({
     errorMessage: function (field) {
         return Session.get('postSubmitErrors')[field];
@@ -11,9 +26,10 @@ Template.postAdd.helpers({
         return !!Session.get('postSubmitErrors')[field] ? 'has-error' : '';
     },
     galleryId: function () {
-        return Session.get('fileObjId');
+        return Session.get('fileObjIds');
     },
     postGallery: function () {
+        var tmpl = Template.instance();
         return Images.find({
             _id: {
                 $in: Session.get('fileObjIds') || []
@@ -25,22 +41,18 @@ Template.postAdd.helpers({
 Template.postAdd.events({
     'change .js-attach-image': function (e) {
         e.preventDefault();
-
-        var arr = [];
         FS.Utility.eachFile(e, function (file) {
             var fileObj = Images.insert(file, function (err, fileObj) {});
-            arr.push(fileObj._id);
+            Template.postAdd.arr.push(fileObj._id);
         });
-        Session.set('fileObjIds', arr);
-        Meteor.setTimeout(function () {
-            $(".owl-carousel").owlCarousel({
-                navigation: true, // Show next and prev buttons
-                slideSpeed: 300,
-                paginationSpeed: 400,
-                navigationText : ["<",">"],
-                singleItem: true
-            })
-        }, 1000);
+        Session.set('fileObjIds', Template.postAdd.arr);
+    },
+    'click .js-cross-image': function (e) {
+        var _index = $(".owl-pagination").find(".active").index();
+        Template.postAdd.arr.splice(_index, 1);
+        Session.set('fileObjIds', Template.postAdd.arr);
+
+        Template.postAdd.owl.removeItem(_index);
     },
     'submit form': function (e) {
         e.preventDefault();
@@ -72,64 +84,3 @@ Template.postAdd.events({
         $("#postAdd").submit();
     }
 });
-
-
-/*Template.postAdd.onCreated(function () {
-    Session.set('postSubmitErrors', {});
-});
-
-Template.postAdd.helpers({
-    errorMessage: function (field) {
-        return Session.get('postSubmitErrors')[field];
-    },
-    errorClass: function (field) {
-        return !!Session.get('postSubmitErrors')[field] ? 'has-error' : '';
-    },
-    userAvatar: function () {
-        return Images.find({
-            _id:Meteor.user().avatarId
-        });
-    }
-});
-
-Template.postAdd.events({
-    'change .js-attach-image': function (e) {
-        e.preventDefault();
-
-        FS.Utility.eachFile(e, function (file) {
-            Images.insert(file, function (err, fileObj) {
-                var avatarId = fileObj._id;
-                Meteor.call('setAvatar', avatarId, function (error, result) {
-                    // 显示错误信息并退出
-                    if (error) {
-                        return throwError(error.reason);
-                    } else {}
-                });
-            });
-        });
-    },
-    'submit form': function (e) {
-        e.preventDefault();
-
-        var post = {
-            galleryId: $(e.target).find('#galleryId').val(),
-            number: $(e.target).find('#number').val(),
-            title: $(e.target).find('#title').val()
-        };
-
-        Meteor.call('postInsert', post, function (error, result) {
-            // 显示错误信息并退出
-            if (error) {
-                return throwError(error.reason);
-            }
-
-            Router.go('postDetails', {
-                _id: result._id
-            });
-        });
-    },
-    'click .js-add': function (e) {
-        e.preventDefault();
-        $("#postAdd").submit();
-    }
-});*/
