@@ -52,8 +52,42 @@ Meteor.methods({
         url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appId + "&secret=" + appSecret + "&code=" + code + "&grant_type=authorization_code";
         accessToken = (eval("(" + (HTTP.get(url)).content + ")"));
 
+        url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + accessToken.access_token + "&openid=" + accessToken.openid + "&lang=zh_CN"; //获取微信用户信息的URL
+        userinfo = (eval("(" + (HTTP.get(url)).content + ")"));
+        //查询微信用户是否存在；
+        var wx_user = Meteor.users.findOne({
+            'profile.openid': accessToken.openid
+        });
+
+
+        if (wx_user) {
+            //return wx_user._id;
+            this.setUserId(wx_user._id);
+        } else {
+            var wx_user = {
+                username: userinfo.openid,
+                password: createPassword(),
+                profile: {
+                    openid: userinfo.openid
+                }
+            };
+            //Meteor.logout();
+            Accounts.createUser(wx_user);
+        }
+        return userinfo;
+    }
+});
+
+/*Meteor.methods({
+    getWxUserinfoService: function (code) {
+        check(code, String);
+
+        var url, userinfo;
+
+        url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appId + "&secret=" + appSecret + "&code=" + code + "&grant_type=authorization_code";
+        accessToken = (eval("(" + (HTTP.get(url)).content + ")"));
+
         if (accessToken.scope === "snsapi_base") {
-            //查询微信用户是否存在；
             var wx_user = Meteor.users.findOne({
                 'profile.openid': accessToken.openid
             });
@@ -90,7 +124,6 @@ Meteor.methods({
         } else {
             url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + accessToken.access_token + "&openid=" + accessToken.openid + "&lang=zh_CN"; //获取微信用户信息的URL
             userinfo = (eval("(" + (HTTP.get(url)).content + ")"));
-            //return userinfo;
             var wx_user = {
                 username: userinfo.openid,
                 password: createPassword(),
@@ -100,9 +133,8 @@ Meteor.methods({
                     refresh_token: accessToken.refresh_token
                 }
             };
-            //Meteor.logout();
             Accounts.createUser(wx_user);
             return userinfo;
         }
     }
-});
+});*/
