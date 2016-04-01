@@ -1,8 +1,13 @@
 <template name="postItem">
-    <li class="item-activity">
-        <div class="attribution">
-            <span class="avatar"><img src="https://avatars3.githubusercontent.com/u/204768?v=2&amp;s=400" class="image-avatar"></span>
-            <span class="meta"><span class="author">{{author}}</span> <a class="recipe" href="{{url}}">{{title}}</a> <span>{{domain}}</span><a href="{{pathFor 'postDetails'}}" class="location">&mdash;SoMA, San Francisco</a></span>
-        </div>
-    </li>
+    <a class="item-post {{highlightedClass}}" href="{{pathFor 'postDetails'}}">
+        <span class="attribution">
+        <span class="title-post">{{title}}</span>
+        <span class="metadata-post">
+          <span class="author-post">{{author}}</span>
+        <span class="bookmarks-post"><span class="icon-bookmark"></span> {{bookmarkCount}}</span>
+        </span>
+        </span>
+        {{#each postGallery}}
+        <img src="{{this.url store='original' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" /> {{/each}}
+    </a>
 </template>

@@ -7,7 +7,7 @@
                     {{#each postGallery}} {{> galleryItem}} {{/each}}
                 </div>
                 <span id="uploadIcon" class="icon-plus"></span>
-                <span id="crossIcon" class="icon-cross js-cross-image"></span>
+                <span id="crossIcon" class="icon-cross js-cross-image" style="display:none"></span>
                 <input class="upload-avatar js-attach-image" id="uploadAvatar" type="file" multiple>
                 <span class="hours">{{errorMessage 'galleryId'}}</span>
             </div>
@@ -21,12 +21,27 @@
                     </div>
                 </div>
                 <div class="form-group {{errorClass 'number'}}">
-                    <label class="control-label" for="title">拼团人数</label>
+                    <label class="control-label" for="number">拼团人数</label>
                     <div class="controls">
                         <input name="number" id="number" type="number" value="" placeholder="最低发起人数" class="form-control" />
                         <span class="help-block">{{errorMessage 'number'}}</span>
                     </div>
                 </div>
+                <div class="form-group {{errorClass 'price'}}">
+                    <label class="control-label" for="price">商品单价</label>
+                    <div class="controls">
+                        <input name="price" id="price" type="text" value="" placeholder="商品单价" class="form-control" />
+                        <span class="help-block">{{errorMessage 'price'}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="price">商品描述</label>
+                    <div class="controls">
+                        <textarea name="discription" id="discription" type="text" autocapitalize="off" autocorrect="off" required="" maxlength="140" class="discription form-control" placeholder="说说您的商品…"></textarea>
+                        <span class="help-block">{{errorMessage 'price'}}</span>
+                    </div>
+                </div>
+
             </form>
 
         </div>

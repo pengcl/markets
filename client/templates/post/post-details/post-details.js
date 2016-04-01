@@ -1,6 +1,7 @@
 var TAB_KEY = 'detailsShowTab';
 
 Template.postDetails.onCreated(function () {
+    Meteor.subscribe('images');
     Template.postDetails.setTab('recipe');
 });
 
@@ -60,6 +61,21 @@ Template.postDetails.helpers({
             sort: {
                 date: -1
             }
+        });
+    },
+    postGalleryId: function () {
+        return this.galleryId;
+    },
+    postGallery: function () {
+        return Images.find({
+            _id: {
+                $in: this.galleryId.split(",")
+            }
+        });
+    },
+    userList: function () {
+        return Meteor.call('getBookmarkUsers', this._id, function (error, result) {
+            console.log(result);
         });
     }
 });

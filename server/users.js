@@ -51,3 +51,14 @@ Meteor.methods({
         }
     }
 });
+
+Meteor.methods({
+    getBookmarkUsers: function (postId) {
+        check(postId, String);
+
+        var users = Meteor.users.find({
+            bookmarkedPostIds: postId
+        }).fetch();
+        return users;
+    }
+});

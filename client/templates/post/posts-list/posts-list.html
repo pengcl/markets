@@ -1,4 +1,16 @@
 <template name="postsList">
+    <div class="page post-list">
+        {{> nav title='Post list' black=true}}
+
+        <div class="content-scrollable">
+            <div class="list-posts">
+                {{#each posts}} {{> postItem}} {{/each}}
+            </div>
+        </div>
+        <a class="btn btn-block btn-primary js-add-post" href="{{pathFor 'postAdd'}}">发起拼团</a>
+    </div>
+</template>
+<!--<template name="postsList">
     <div class="page home">
         {{#nav title='Local Market' black=true}}
         <a class="nav-item js-setting" href="{{pathFor 'settings'}}"><span class="icon-user"></span></a> {{/nav}}
@@ -17,4 +29,4 @@
         </div>
         <a class="btn btn-block btn-primary js-add-post" href="{{pathFor 'postAdd'}}">创建新帖子</a>
     </div>
-</template>
+</template>-->

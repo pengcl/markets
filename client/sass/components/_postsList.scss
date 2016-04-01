@@ -1,3 +1,54 @@
+.page.post-list {
+    .item-post:first-child {
+        height: 400px;
+        .attribution {
+            @include background-image(linear-gradient(top, rgba(255, 255, 255, .9), rgba(255, 255, 255, 1) 50%, #fff 100%));
+            @include transform( translate3d(0px, 0px, 0px));
+            &:before {
+                font-size: 12px;
+                font-weight: 700;
+                letter-spacing: .3em;
+                text-indent: .3em;
+                text-transform: uppercase;
+                position: absolute;
+                top: 0;
+                right: 50%;
+                @include transform( translate3d(50%, -50%, 0));
+                background: #d83e14;
+                color: #fff;
+                content: '精选';
+                padding: .3rem .5rem .2rem;
+            }
+            .title-post {
+                font-size: 22px;
+                line-height: 26px;
+                font-weight: 700;
+                color: $color-full;
+                line-height: 1;
+                padding-bottom: .4rem;
+                padding-top: .8rem;
+            }
+            .metadata-post {
+                padding-bottom: .8rem;
+            }
+            .author-post,
+            .bookmarks-post {
+                color: $color-medium;
+            }
+        }
+        img {
+            position: absolute;
+            left: 50%;
+            top: auto;
+            bottom: auto;
+            right: auto;
+            min-width: 100%;
+            height: 100%;
+            @include transform( translate3d(-50%, 0, 0));
+        }
+    }
+}
+
 .list-activities {
     background: white;
     min-height: 16em;
@@ -82,94 +133,83 @@
     }
 }
 
-.list-recipes {
+.list-posts {
     overflow: hidden;
 }
 
-.item-recipe {
+.item-post {
     @include transform(translate3d(0, 0, 0));
     float: left;
     overflow: hidden;
     position: relative;
     width: 50%;
-}
-
-.item-recipe .attribution {
-    position: absolute;
-    top: auto;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: auto;
-    height: auto;
-    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMSAxIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48bGluZWFyR3JhZGllbnQgaWQ9Imxlc3NoYXQtZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYigwLCAwLCAwKSIgc3RvcC1vcGFjaXR5PSIwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSJyZ2IoMCwgMCwgMCkiIHN0b3Atb3BhY2l0eT0iMC41Ii8+PC9saW5lYXJHcmFkaWVudD48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2xlc3NoYXQtZ2VuZXJhdGVkKSIgLz48L3N2Zz4=);
-    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) 100%);
-    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) 100%);
-    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) 100%);
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) 100%);
-    padding: .5rem;
-    text-align: center;
-    z-index: 1;
-}
-
-.item-recipe .attribution .title-recipe {
-    font-size: 12px;
-    line-height: 18px;
-    font-family: 'lato', "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    color: white;
-    display: inline-block;
-    line-height: 1.1em;
-}
-
-.item-recipe .attribution .metadata-recipe {
-    display: block;
-    white-space: nowrap;
-    width: 100%;
-}
-
-.item-recipe .attribution .metadata-recipe .author-recipe {
-    font-size: 9px;
-    line-height: 18px;
-    font-family: 'lorabold', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
-    font-style: normal;
-    letter-spacing: .3em;
-    text-indent: .3em;
-    text-transform: uppercase;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: rgba(255, 255, 255, 0.7);
-    display: inline-block;
-    line-height: 1;
-    max-width: 90%;
-    padding-right: 1rem;
-}
-
-.item-recipe .attribution .metadata-recipe .bookmarks-recipe {
-    font-size: 10px;
-    line-height: 16px;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1;
-    display: inline-block;
-    margin-left: -1.25rem;
-    padding: .3em .5em;
-    vertical-align: middle;
-}
-
-.item-recipe .attribution .metadata-recipe .bookmarks-recipe .icon-bookmark {
-    font-size: 80%;
-    vertical-align: middle;
-}
-
-.item-recipe img {
-    display: block;
-    height: auto;
-    width: 100%;
-}
-
-.item-recipe.highlighted {
-    width: 100%;
+    .attribution {
+        position: absolute;
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: auto;
+        height: auto;
+        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMSAxIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48bGluZWFyR3JhZGllbnQgaWQ9Imxlc3NoYXQtZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYigwLCAwLCAwKSIgc3RvcC1vcGFjaXR5PSIwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSJyZ2IoMCwgMCwgMCkiIHN0b3Atb3BhY2l0eT0iMC41Ii8+PC9saW5lYXJHcmFkaWVudD48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2xlc3NoYXQtZ2VuZXJhdGVkKSIgLz48L3N2Zz4=);
+        @include background-image(linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) 100%));
+        padding: .8rem;
+        text-align: center;
+        z-index: 1;
+        .title-post {
+            font-size: 12px;
+            line-height: 18px;
+            font-family: 'lato', "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            color: white;
+            display: inline-block;
+            line-height: 1.1em;
+        }
+        .metadata-post {
+            display: block;
+            white-space: nowrap;
+            width: 100%;
+            .author-post {
+                font-size: 9px;
+                line-height: 18px;
+                font-family: 'lorabold', TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+                font-style: normal;
+                letter-spacing: .3em;
+                text-indent: .3em;
+                text-transform: uppercase;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color: rgba(255, 255, 255, 0.7);
+                display: inline-block;
+                line-height: 1;
+                max-width: 90%;
+                padding-right: 1rem;
+            }
+            .bookmarks-post {
+                font-size: 10px;
+                line-height: 16px;
+                color: rgba(255, 255, 255, 0.7);
+                line-height: 1;
+                display: inline-block;
+                margin-left: -1.6rem;
+                padding: .5em .8em;
+                vertical-align: middle;
+                .icon-bookmark {
+                    font-size: 80%;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+    img {
+        display: block;
+        height: auto;
+        width: 100%;
+    }
+    &.highlighted {
+        width: 100%;
+    }
 }
 
 .list-title {

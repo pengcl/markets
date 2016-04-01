@@ -1,10 +1,25 @@
+Template.postItem.onRendered(function () {
+    var i = 0;
+    for (i; i < 5; i++) {
+        $(".item-post").eq(i*5).addClass("highlighted");
+    };
+});
+
 Template.postItem.helpers({
-    domain: function(){
-        var a = document.createElement("a");
-        a.href = this.url;
-        return a.hostname;
+    highlightedClass: function () {
+        if (this.size === 'large')
+            return 'highlighted';
     },
-    commentsCount: function() {
-    return Comments.find({postId: this._id}).count();
-  }
-})
+
+    bookmarkCount: function () {
+        var count = BookmarkCounts.findOne({
+            postId: this._id
+        });
+        return count && count.count;
+    },
+    postGallery: function () {
+        return Images.find({
+            _id: String(this.galleryId.split(",")[0])
+        });
+    }
+});

@@ -5,7 +5,13 @@
         <a href="#" class="nav-item js-remove-bookmark bookmarked"><span class="icon-star"></span></a> {{else}}
         <a href="#" class="nav-item js-add-bookmark"><span class="icon-star-hollow"></span></a> {{/if}} {{/if}} {{/nav}}
 
-        <div class="bg-image" style="background-image: url('/images/recipes/640x800/summer-apricots-honey-panna-cotta.jpg')"></div>
+        <div class="bg-image" style="background-image: url('/images/recipes/640x800/summer-apricots-honey-panna-cotta.jpg')">
+            <div class="owl-carousel owl-theme" style="z-index:2">
+                {{#each postGallery}}
+                {{> galleryItem}}
+                {{/each}}
+            </div>
+        </div>
 
         <div class="attribution-title js-uncollapse">
             <h1 class="title">{{title}}</h1>
@@ -17,7 +23,7 @@
 
             <div class="btns-group pure-g">
                 <div class="pure-u-1-2">
-                    <a class="btn btn-secondary btn-block {{#if isActiveTab 'make'}}active{{/if}} {{#if isActiveTab 'recipe'}}no-state{{/if}} js-show-order">关注</a>
+                    <a class="btn btn-secondary btn-block {{#if isActiveTab 'make'}}active{{/if}} {{#if isActiveTab 'recipe'}}no-state{{/if}} js-show-order">详情</a>
                 </div>
                 <div class="pure-u-1-2">
                     <a class="btn btn-secondary btn-block {{#if isActiveTab 'make'}}active{{/if}} {{#if isActiveTab 'recipe'}}no-state{{/if}} js-show-comment">评论</a>
@@ -29,23 +35,11 @@
         <div class="content-scrollable static-nav order-scrollable">
             <a class="btn-tertiary js-share"><span class="icon-camera"></span> Share that you made this</a>
 
-            <h2 class="list-title">Ingredients</h2>
+            <h2 class="list-title">参与用户</h2>
             <ul class="list-ingredients">
-
-                <li class="item-ingredient">6 apricots</li>
-
-                <li class="item-ingredient">olive oil</li>
-
-                <li class="item-ingredient">1/4 cup water</li>
-
-                <li class="item-ingredient">1 tablespoon powdered gelatin (2 sheets gelatin)</li>
-
-                <li class="item-ingredient">2 cups heavy cream</li>
-
-                <li class="item-ingredient">1/4 cup honey</li>
-
-                <li class="item-ingredient">1 cup full fat buttermilk</li>
-
+               {{#each userList}}
+                <li class="item-ingredient">1</li>
+                {{/each}}
             </ul>
 
             <h2 class="list-title">Directions</h2>
@@ -68,10 +62,8 @@
 
         <div class="content-scrollable static-nav comment-scrollable">
             <div class="list-activities">
-                {{#each activities}}
-                    {{> activity}}
-                {{else}}
-                    <div class="wrapper-message">
+                {{#each activities}} {{> activity}} {{else}}
+                <div class="wrapper-message">
                     <div class="title-message">No feed activity yet</div>
                     <div class="subtitle-message">Be the first to share that you made this recipe. <a class="js-share">Share now</a></div>
                 </div>

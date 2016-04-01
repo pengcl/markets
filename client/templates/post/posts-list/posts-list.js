@@ -1,3 +1,7 @@
+Template.postsList.onCreated(function () {
+    Meteor.subscribe('images');
+});
+
 Template.postsList.helpers({
     posts: function () {
         return Posts.find({}, {
