@@ -59,6 +59,8 @@ Meteor.methods({
         var users = Meteor.users.find({
             bookmarkedPostIds: postId
         }).fetch();
+        //Session.set("userList",users);
+
         return users;
     }
 });

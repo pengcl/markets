@@ -14,7 +14,7 @@ Template.getWxUser.onCreated(function () {
 
 Template.getWxUser.helpers({
     userinfo: function () {
-        return Meteor.user();
+        return Session.get("userinfo");
     }
 });
 
@@ -31,37 +31,35 @@ Template.getWxUser.getWxUserinfoService = function (code) {
     Meteor.call('getWxUserinfoService', code, function (error, result) {
         if (result) {
             if (result.errcode) {
-                if (result.errcode === 40029) {
-                    Template.getWxUser.getCode("snsapi_base");
-                }else{
-                    console.log("else");
-                }
+                Template.getWxUser.getCode("snsapi_base");
             } else {
-                if (result.openidExists) {
+                if (result.userExists) {
                     Meteor.connection.setUserId(result.userId);
                     console.log(result);
+                    Router.go('postsList');
                 } else {
-                    console.log(result);
+                    Session.set("userinfo", result.userinfo);
                     var wx_user = {
                         username: result.userinfo.openid,
                         password: Template.getWxUser.createPassword(),
                         profile: {
                             openid: result.userinfo.openid,
-                            nickname: result.userinfo.nickname,
-                            country: result.userinfo.country,
-                            province: result.userinfo.province,
-                            city: result.userinfo.city,
-                            sex: result.userinfo.sex,
-                            headimgurl: result.userinfo.headimgurl,
-                            language: result.userinfo.language
+                            name: result.userinfo.nickname,
+                            headimgurl:result.userinfo.headimgurl
                         }
-                    }
-                    Accounts.createUser(wx_user);
-                    console.log(result);
+                    };
+                    Accounts.createUser(wx_user, function (err) {
+                        if (err) {
+                            return alert(err);
+                            //return throwError(err);
+                        } else {
+                            Router.go('postsList');
+                        }
+                    });
                 }
             }
-            console.log(result);
         } else {
+            console.log(error);
             return error;
         }
     });

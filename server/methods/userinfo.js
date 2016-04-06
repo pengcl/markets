@@ -21,29 +21,26 @@ Meteor.methods({
         userinfo = (eval("(" + (HTTP.get(url)).content + ")"));
         //查询微信用户是否存在；
         var wx_user = Meteor.users.findOne({
-            'profile.openid': accessToken.openid
+            'profile.openid': userinfo.openid
         });
 
-
         if (wx_user) {
-            //return wx_user._id;
             this.setUserId(wx_user._id);
+            return {
+                userExists: true,
+                userId: wx_user._id,
+                userinfo: userinfo
+            }
         } else {
-            var wx_user = {
-                username: userinfo.openid,
-                password: createPassword(),
-                profile: {
-                    openid: userinfo.openid
-                }
-            };
-            //Meteor.logout();
-            Accounts.createUser(wx_user);
+            return {
+                userExists: false,
+                userinfo: userinfo
+            }
         }
-        return userinfo;
     }
 });
 
-Meteor.methods({
+/*Meteor.methods({
     getWxUserinfoSubscribe: function (code) {
         check(code, String);
 
@@ -76,7 +73,7 @@ Meteor.methods({
         }
         return userinfo;
     }
-});
+});*/
 
 /*Meteor.methods({
     getWxUserinfoService: function (code) {

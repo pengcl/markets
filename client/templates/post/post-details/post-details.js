@@ -3,6 +3,12 @@ var TAB_KEY = 'detailsShowTab';
 Template.postDetails.onCreated(function () {
     Meteor.subscribe('images');
     Template.postDetails.setTab('recipe');
+    Meteor.call('getBookmarkUsers', Session.get("postId"), function (error, result) {
+        if(result){
+            console.log(result);
+            Session.set("userList",result);
+        }
+    });
 });
 
 Template.postDetails.onRendered(function () {
@@ -74,9 +80,7 @@ Template.postDetails.helpers({
         });
     },
     userList: function () {
-        return Meteor.call('getBookmarkUsers', this._id, function (error, result) {
-            console.log(result);
-        });
+        return Session.get("userList");
     }
 });
 

@@ -7,9 +7,7 @@
 
         <div class="bg-image" style="background-image: url('/images/recipes/640x800/summer-apricots-honey-panna-cotta.jpg')">
             <div class="owl-carousel owl-theme" style="z-index:2">
-                {{#each postGallery}}
-                {{> galleryItem}}
-                {{/each}}
+                {{#each postGallery}} {{> galleryItem}} {{/each}}
             </div>
         </div>
 
@@ -33,29 +31,21 @@
 
 
         <div class="content-scrollable static-nav order-scrollable">
-            <a class="btn-tertiary js-share"><span class="icon-camera"></span> Share that you made this</a>
-
             <h2 class="list-title">参与用户</h2>
             <ul class="list-ingredients">
-               {{#each userList}}
-                <li class="item-ingredient">1</li>
+                {{#each userList}}
+                <li class="item-ingredient">
+                    <span class="avatar">
+                        <img src="{{profile.headimgurl}}" class="image-avatar">
+                    </span>{{profile.name}}
+                </li>
                 {{/each}}
             </ul>
 
-            <h2 class="list-title">Directions</h2>
+            <h2 class="list-title">商品简介</h2>
             <ol class="list-directions">
 
-                <li class="item-direction">
-                    <span class="text">Cut the apricots in half and remove the pit. Brush lightly with olive oil and grill over hot coals until tender (about 3-4 minutes on each side).</span>
-                </li>
-
-                <li class="item-direction">
-                    <span class="text">Let cool and puree until smooth in a food processor. Divide the mixture between 6 glasses.</span>
-                </li>
-
-                <li class="item-direction">
-                    ...
-                </li>
+                {{discription}}
             </ol>
             <a href="http://www.tarteletteblog.com/2011/07/recipe-gluten-free-apricots-honey-panna.html" target="_blank" class="btn btn-block btn-primary js-open">See full recipe on Tartelette</a>
         </div>
