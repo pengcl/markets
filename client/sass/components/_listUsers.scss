@@ -1,0 +1,16 @@
+.list-users {
+    padding: 0.5rem;
+    .item-user {
+        .avatar {
+            @include border-radius(5px);
+            margin: 1rem;
+            .image-avatar {
+                display: block;
+            }
+        }
+        .name {
+            text-align: center;
+            display: block;
+        }
+    }
+}

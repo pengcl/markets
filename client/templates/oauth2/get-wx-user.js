@@ -9,6 +9,7 @@ Template.getWxUser.onCreated(function () {
         }
     } else {
         console.log("have a user");
+        Router.go('postsList');
     }
 });
 
@@ -45,7 +46,7 @@ Template.getWxUser.getWxUserinfoService = function (code) {
                         profile: {
                             openid: result.userinfo.openid,
                             name: result.userinfo.nickname,
-                            headimgurl:result.userinfo.headimgurl
+                            headimgurl: result.userinfo.headimgurl
                         }
                     };
                     Accounts.createUser(wx_user, function (err) {

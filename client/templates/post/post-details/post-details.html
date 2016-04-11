@@ -32,16 +32,16 @@
 
         <div class="content-scrollable static-nav order-scrollable">
             <h2 class="list-title">参与用户</h2>
-            <ul class="list-ingredients">
+            <ul class="list-users pure-g">
                 {{#each userList}}
-                <li class="item-ingredient">
+                <li class="item-user pure-u-1-4">
                     <span class="avatar">
                         <img src="{{profile.headimgurl}}" class="image-avatar">
-                    </span>{{profile.name}}
+                    </span>
+                    <span class="name">{{profile.name}}</span>
                 </li>
                 {{/each}}
             </ul>
-
             <h2 class="list-title">商品简介</h2>
             <ol class="list-directions">
 
